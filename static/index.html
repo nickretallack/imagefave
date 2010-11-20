@@ -1,0 +1,30 @@
+<html>
+    <title>ImageFave | Collect your favorite images on the net</title>
+    <script type="text/javascript" src="http://www.broofa.com/Tools/Math.uuid.js"></script>
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.4.4/jquery.min.js"></script>
+    <script type="text/javascript">
+        var uid = Math.uuid()
+        function make_bookmarklet(exclude){
+            return "javascript:(function(){window.imagefave_uid='"+uid+"';var require=function(source,onload){var script=document.createElement('SCRIPT');script.type='text/javascript';script.src=source;script.onload=onload;document.body.appendChild(script);};require('https://ajax.googleapis.com/ajax/libs/jquery/1.4.4/jquery.min.js',function(){require('http://documentcloud.github.com/underscore/underscore-min.js', function(){require('http://localhost:5000/static/script.js')})})})();"
+        }
+        $(function(){
+                $('.bookmarklet').append('<a href="'+make_bookmarklet()+'">ImageFave</a>')
+                $('.user-id').append(uid)
+        })
+    </script>
+
+</html>
+<h1>ImageFave</h1>
+
+<p>ImageFave helps you collect images you like from around the web, and discover other images you might like.</p>
+
+<p>To begin, drag this link into your bookmarks bar: <span class="bookmarklet"></span>.  Then, browse the internet.  When you see an image you like, click the bookmark and use the nifty UI that shows up to select the images you like.</p>
+
+<p>Your user ID shall be <span class='user-id'></span>.  It is included in the bookmarklet.</p>
+
+<p>I recommend using Google Browser Sync to keep this bookmark the same on different machines/browsers.  Or you could store your user id in a safe place and re-insert it into a fresh bookmarklet when needed.<p>
+
+<h3>Coming soon:</h3>
+<ul><li>Tool to generate a bookmarklet based on a user id.
+    <li>Tool to merge two different accounts into one
+</ul>
