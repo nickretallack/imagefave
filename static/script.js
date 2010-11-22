@@ -6,7 +6,7 @@ console.log('loaded');
     var url_prefix = "http://localhost:5000/fave/"
 
     function big_enough(image){
-        return image.width() > 250 && image.height() > 250
+        return image.width() > 120 && image.height() > 120
     }
 
     var tracking_pixel = new Image()

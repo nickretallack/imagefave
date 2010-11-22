@@ -1,4 +1,4 @@
-from flask import Flask
+from flask import Flask, render_template
 app = Flask(__name__)
 from urllib import urlopen
 from hashlib import sha1 as hasher
@@ -37,7 +37,7 @@ def fave(user, upload_path):
     
     try:
         # Note: this can stream from a file.  We should do that.
-        fs.put(upload_data, _id=image_id)
+        fs.put(upload_data, _id=image_id, extension=image_extension)
     except FileExists:
         pass
 
@@ -48,6 +48,16 @@ def fave(user, upload_path):
     #output.write(upload_data)
     #app.logger.debug("Hit with %s" % data)
     return ""
+
+@app.route("/gallery/<user>")
+def gallery(user):
+    preferences = Preference.find(user_id=user)
+    return render_template('gallery.html', preferences=preferences)
+
+@app.route("/mongo/<file>")
+def mongo_serve(file):
+    return fs.get(file).read()
+
 
 if __name__ == "__main__":
     app.debug = True
